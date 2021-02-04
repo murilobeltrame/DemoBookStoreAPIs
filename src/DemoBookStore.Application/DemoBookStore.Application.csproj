@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.1</TargetFramework>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <LangVersion>9.0</LangVersion>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\DemoBookStore.Domain\DemoBookStore.Domain.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Books\" />
+    <Folder Include="Books\Commands\" />
+    <Folder Include="Books\Queries\" />
+    <Folder Include="Books\Queries\GetBooks\" />
+    <Folder Include="Books\Commands\CreateBook\" />
+    <Folder Include="Books\Commands\DeleteBook\" />
+    <Folder Include="_Common\" />
+    <Folder Include="_Common\Interfaces\" />
+    <Folder Include="Books\Commands\ReviewBook\" />
+    <Folder Include="Books\Commands\UpdateBookPrice\" />
+    <Folder Include="Carts\" />
+    <Folder Include="Carts\Commands\" />
+    <Folder Include="Carts\Queries\" />
+    <Folder Include="Carts\Queries\GetCartForUser\" />
+    <Folder Include="Carts\Commands\AddItemToCart\" />
+    <Folder Include="_Common\Exceptions\" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="MediatR" Version="9.0.0" />
+  </ItemGroup>
+</Project>
