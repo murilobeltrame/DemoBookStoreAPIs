@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBookStore.Domain", "Dem
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBookStore.Application", "DemoBookStore.Application\DemoBookStore.Application.csproj", "{06576D97-03C3-41C7-ABD5-4771B1D4F57F}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBookStore.Domain.UnitTests", "DemoBookStore.Domain.UnitTests\DemoBookStore.Domain.UnitTests.csproj", "{235D60EA-1458-4EAC-A4BD-97D4A951F295}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBookStore.Application.Unit.Tests", "DemoBookStore.Application.Unit.Tests\DemoBookStore.Application.Unit.Tests.csproj", "{2FB1B729-AA06-4692-AE58-73195E98BB06}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{06576D97-03C3-41C7-ABD5-4771B1D4F57F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{06576D97-03C3-41C7-ABD5-4771B1D4F57F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{06576D97-03C3-41C7-ABD5-4771B1D4F57F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{235D60EA-1458-4EAC-A4BD-97D4A951F295}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{235D60EA-1458-4EAC-A4BD-97D4A951F295}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{235D60EA-1458-4EAC-A4BD-97D4A951F295}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{235D60EA-1458-4EAC-A4BD-97D4A951F295}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
