@@ -4,7 +4,7 @@ using DemoBookStore.Domain.Entities;
 
 namespace DemoBookStore.Application.Books.Commands.CreateBook
 {
-    public class CreateBookResponse
+    public record CreateBookResponse
     {
         public IEnumerable<Author> Authors { get; }
         public Publisher Publisher { get; }
@@ -24,6 +24,6 @@ namespace DemoBookStore.Application.Books.Commands.CreateBook
             book.Authors,
             book.Publisher,
             book.Pages,
-            book.GetPriceFor(date: DateTime.Now)?.Value ?? 0m);
+            book.GetPriceAt(DateTime.Now)?.Value ?? 0m);
     }
 }

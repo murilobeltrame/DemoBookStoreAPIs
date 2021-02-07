@@ -1,6 +1,4 @@
 ﻿namespace DemoBookStore.Application.Books.Commands.UpdateBookPrice
 {
-    public class UpdateBookPriceResponse
-    {
-    }
+    public record UpdateBookPriceResponse { }
 }

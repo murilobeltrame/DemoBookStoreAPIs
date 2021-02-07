@@ -21,10 +21,12 @@ namespace DemoBookStore.Domain.Entities
 
         public void SetPrice(decimal value, DateTime? startingAt) => Pricing.Add(new Price(this, value, startingAt ?? DateTime.Now));
 
-        public Price GetPriceFor(DateTime date) => Pricing
+        public Price GetPriceAt(DateTime date) => Pricing
             .OrderByDescending(price => price.StartingAt)
             .LastOrDefault(price => price.StartingAt >= date);
 
         public void PlaceReview(ushort rating, string note) => Reviews.Add(new Review(this, rating, note));
+
+        public ushort? GetAverageRating() => (ushort?)Reviews?.Average(review => review.Rating);
     }
 }

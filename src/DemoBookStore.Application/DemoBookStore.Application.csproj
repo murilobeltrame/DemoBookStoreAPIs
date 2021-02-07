@@ -30,6 +30,7 @@
     <Folder Include="Carts\Queries\GetCartForUser\" />
     <Folder Include="Carts\Commands\AddItemToCart\" />
     <Folder Include="_Common\Exceptions\" />
+    <Folder Include="_Common\Interfaces\Queries\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />

@@ -1,4 +1,4 @@
 ﻿namespace DemoBookStore.Application.Books.Commands.DeleteBook
 {
-    public class DeleteBookResponse { }
+    public record DeleteBookResponse { }
 }
