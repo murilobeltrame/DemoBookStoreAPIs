@@ -19,7 +19,7 @@ namespace DemoBookStore.Application.Books.Commands.CreateBook
             ushort? pages,
             decimal price) => (Title, Authors, Publisher, Pages, Price) = (title, authors, publisher, pages, price);
 
-        public static CreateBookResponse FromBook(Book book) => new CreateBookResponse(
+        internal static CreateBookResponse FromBook(Book book) => new CreateBookResponse(
             book.Title,
             book.Authors,
             book.Publisher,

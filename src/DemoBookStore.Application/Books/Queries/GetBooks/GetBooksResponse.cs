@@ -21,7 +21,7 @@ namespace DemoBookStore.Application.Books.Queries.GetBooks
         public decimal? CurrentPrice { get; }
         public ushort? AverageRating { get; }
 
-        public static GetBooksResponse FromBook(Book book) => new GetBooksResponse(
+        internal static GetBooksResponse FromBook(Book book) => new GetBooksResponse(
             book.Title,
             string.Join(',', book.Authors.Select(author => $"{author.FirstName} {author.LastName}, ")),
             book.Publisher?.Name,
