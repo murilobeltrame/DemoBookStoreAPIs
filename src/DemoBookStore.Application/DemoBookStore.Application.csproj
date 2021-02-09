@@ -24,15 +24,11 @@
     <Folder Include="_Common\Interfaces\" />
     <Folder Include="Books\Commands\ReviewBook\" />
     <Folder Include="Books\Commands\UpdateBookPrice\" />
-    <Folder Include="Carts\" />
-    <Folder Include="Carts\Commands\" />
     <Folder Include="Carts\Queries\" />
-    <Folder Include="Carts\Queries\GetCartForUser\" />
+    <Folder Include="Carts\Queries\GetCart\" />
     <Folder Include="_Common\Exceptions\" />
     <Folder Include="_Common\Interfaces\Queries\" />
     <Folder Include="Carts\Commands\AddItem\" />
-    <Folder Include="Carts\Commands\Checkout\" />
-    <Folder Include="Carts\Commands\ChangeItemQuantity\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="MediatR" Version="9.0.0" />

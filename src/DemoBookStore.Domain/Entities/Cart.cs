@@ -14,18 +14,39 @@ namespace DemoBookStore.Domain.Entities
         public IList<CartItem> Items { get; } = new List<CartItem>();
         public DateTime CreatedAt { get; }
         public Guid SessionId { get; }
+        public bool CheckedOut { get; private set; } = false;
         public decimal TotalValue => Items.Sum(item => item.Price * item.Quantity);
 
         public void AddItem(Book book, ushort quantity)
         {
-            var matchItem = Items.FirstOrDefault(item => string.Compare(item.Book?.Title, book.Title, StringComparison.InvariantCultureIgnoreCase) >= 0);
-            if (matchItem != null)
+            var item = GetCartItemByTitle(book?.Title);
+            if (item != null)
             {
-                var matchIndex = Items.IndexOf(matchItem);
-                Items[matchIndex] = new CartItem(matchItem.Book, (ushort)(matchItem.Quantity + quantity));
+                var index = Items.IndexOf(item);
+                Items[index] = new CartItem(item.Book, (ushort)(item.Quantity + quantity));
                 return;
             }
             Items.Add(new CartItem(book, quantity));
         }
+
+        public void Checkout() => CheckedOut = true;
+
+        public void RemoveItem(string bookTitle)
+        {
+            var item = GetCartItemByTitle(bookTitle);
+            Items.Remove(item);
+        }
+
+        public void UpdateItemQuantity(string bookTitle, ushort newQuantity)
+        {
+            var item = GetCartItemByTitle(bookTitle);
+            if (item != null)
+            {
+                var index = Items.IndexOf(item);
+                Items[index] = new CartItem(item.Book, newQuantity);
+            }
+        }
+
+        private CartItem GetCartItemByTitle(string title) => Items.FirstOrDefault(item => string.Compare(item.Book?.Title, title, StringComparison.InvariantCultureIgnoreCase) >= 0);
     }
 }
