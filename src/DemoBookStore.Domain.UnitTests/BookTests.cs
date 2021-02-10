@@ -1,30 +1,51 @@
 using DemoBookStore.Domain.Entities;
 using System;
+using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using Xunit;
 
 namespace DemoBookStore.Domain.UnitTests
 {
     public class BookTests
     {
-        Book _dummyBook => new Book(
-            "DummyBook",
-            new Author[] { new Author("John", "Doe") },
-            new Publisher("Publishers House")
-        );
+        private static IEnumerable<Author> MockedAuthors => new Author[] { new Author("John", "Doe") };
+        private static Publisher MockedPublisher => new Publisher("Publishers House");
+        private static string ValidTitle => "DummyBook";
+        private static Book MockedBook => new Book(ValidTitle, MockedAuthors, MockedPublisher);
 
         [Fact]
         public void Should_Be_Instatiated() { }
 
         [Fact]
-        public void Book_without_title_should_throw_an_ArgumentException() { }
+        [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
+        public void Book_without_title_should_throw_an_ArgumentNullException()
+        {
+            //static void act() => new Book(null, MockedAuthors, MockedPublisher);
+
+            //Assert.Throws<ArgumentNullException>(act);
+        }
 
         [Fact]
-        public void Book_without_a_least_one_Author_should_throw_an_ArgumentException() { }
+        [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
+        public void Book_without_a_least_one_Author_should_throw_an_ArgumentException()
+        {
+            //static void act() => new Book(ValidTitle, null, MockedPublisher);
+
+            //Assert.Throws<ArgumentNullException>(act);
+        }
+        // TODO: Empty Collection, Nameless Author
 
         [Fact]
-        public void Book_without_a_Publish_should_throw_an_ArgumentException() { }
+        [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
+        public void Book_without_a_Publisher_should_throw_an_ArgumentException()
+        {
+            //static void act() => new Book(ValidTitle, MockedAuthors, null);
 
-        // PRINCING
+            //Assert.Throws<ArgumentNullException>(act);
+        }
+        // TODO: Nameless Publisher
+
+        // PRICING
 
         [Fact]
         public void Setting_Price_should_accumulate_Price_record() { }
@@ -46,23 +67,23 @@ namespace DemoBookStore.Domain.UnitTests
         [Fact]
         public void Placing_Review_greater_than_5_should_thrown_ArgumentOutOfRangeException()
         {
-            Action act = () => _dummyBook.PlaceReview(6);
+            //void act() => MockedBook.PlaceReview(6);
 
-            Assert.Throws<ArgumentOutOfRangeException>(act);
-            Assert.Equal(0, _dummyBook.Reviews.Count);
+            //Assert.Throws<ArgumentOutOfRangeException>(act);
+            //Assert.Equal(0, MockedBook.Reviews.Count);
         }
 
         [Fact]
         public void Getting_average_rating_should_be_the_Reviews_raging_average()
         {
-            ushort? _expectedRating = 2;
-            var book = _dummyBook;
-            book.PlaceReview(3);
-            book.PlaceReview(1);
+            //ushort? _expectedRating = 2;
+            //var book = MockedBook;
+            //book.PlaceReview(3);
+            //book.PlaceReview(1);
 
-            var result = book.GetAverageRating();
+            //var result = book.GetAverageRating();
 
-            Assert.Equal(_expectedRating, result);
+            //Assert.Equal(_expectedRating, result);
         }
 
         [Fact]
@@ -70,7 +91,7 @@ namespace DemoBookStore.Domain.UnitTests
         {
             ushort? _expectedRating = null;
 
-            var result = _dummyBook.GetAverageRating();
+            var result = MockedBook.GetAverageRating();
 
             Assert.Equal(_expectedRating, result);
         }
