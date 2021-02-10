@@ -10,7 +10,7 @@ namespace DemoBookStore.Domain.Entities
             string title,
             IEnumerable<Author> authors,
             Publisher publisher,
-            ushort? pages) => (Title, Authors, Publisher, Pages) = (title, authors, publisher, pages);
+            ushort? pages = null) => (Title, Authors, Publisher, Pages) = (title, authors, publisher, pages);
 
         public IEnumerable<Author> Authors { get; }
         public Publisher Publisher { get; }
@@ -25,8 +25,8 @@ namespace DemoBookStore.Domain.Entities
             .OrderByDescending(price => price.StartingAt)
             .LastOrDefault(price => price.StartingAt >= date);
 
-        public void PlaceReview(ushort rating, string note) => Reviews.Add(new Review(this, rating, note));
+        public void PlaceReview(ushort rating, string note = null) => Reviews.Add(new Review(this, rating, note));
 
-        public ushort? GetAverageRating() => (ushort?)Reviews?.Average(review => review.Rating);
+        public ushort? GetAverageRating() => Reviews.Any() ? (ushort?)Reviews.Average(review => review.Rating) : null;
     }
 }
