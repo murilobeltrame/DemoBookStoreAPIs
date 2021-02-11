@@ -10,11 +10,28 @@ namespace DemoBookStore.Domain.Entities
             string title,
             IEnumerable<Author> authors,
             Publisher publisher,
-            ushort? pages = null) => (Title, Authors, Publisher, Pages) = (title, authors, publisher, pages);
+            ushort? pages = null
+        )=> (Title, Authors, Publisher, Pages) = (title, authors, publisher, pages);
 
-        public IEnumerable<Author> Authors { get; }
-        public Publisher Publisher { get; }
-        public string Title { get; }
+        private IEnumerable<Author> _authors;
+        private Publisher _publisher;
+        private string _title;
+
+        public IEnumerable<Author> Authors
+        {
+            get => _authors;
+            init => _authors = (value?.Any()).GetValueOrDefault() ? value : throw new ArgumentException("authors");
+        }
+        public Publisher Publisher
+        {
+            get => _publisher;
+            init => _publisher = value ?? throw new ArgumentException("publisher");
+        }
+        public string Title
+        {
+            get => _title;
+            init => _title = !string.IsNullOrWhiteSpace(value) ? value : throw new ArgumentNullException("title");
+        }
         public ushort? Pages { get; }
         public IList<Review> Reviews { get; } = new List<Review>();
         public IList<Price> Pricing { get; } = new List<Price>();

@@ -20,18 +20,18 @@ namespace DemoBookStore.Domain.UnitTests
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_title_should_throw_an_ArgumentNullException()
         {
-            //static void act() => new Book(null, MockedAuthors, MockedPublisher);
+            static void act() => new Book(null, MockedAuthors, MockedPublisher);
 
-            //Assert.Throws<ArgumentNullException>(act);
+            Assert.Throws<ArgumentNullException>(act);
         }
 
         [Fact]
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_a_least_one_Author_should_throw_an_ArgumentException()
         {
-            //static void act() => new Book(ValidTitle, null, MockedPublisher);
+            static void act() => new Book(ValidTitle, null, MockedPublisher);
 
-            //Assert.Throws<ArgumentNullException>(act);
+            Assert.Throws<ArgumentException>(act);
         }
         // TODO: Empty Collection, Nameless Author
 
@@ -39,9 +39,9 @@ namespace DemoBookStore.Domain.UnitTests
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_a_Publisher_should_throw_an_ArgumentException()
         {
-            //static void act() => new Book(ValidTitle, MockedAuthors, null);
+            static void act() => new Book(ValidTitle, MockedAuthors, null);
 
-            //Assert.Throws<ArgumentNullException>(act);
+            Assert.Throws<ArgumentException>(act);
         }
         // TODO: Nameless Publisher
 
@@ -67,23 +67,23 @@ namespace DemoBookStore.Domain.UnitTests
         [Fact]
         public void Placing_Review_greater_than_5_should_thrown_ArgumentOutOfRangeException()
         {
-            //void act() => MockedBook.PlaceReview(6);
+            void act() => MockedBook.PlaceReview(6);
 
-            //Assert.Throws<ArgumentOutOfRangeException>(act);
-            //Assert.Equal(0, MockedBook.Reviews.Count);
+            Assert.Throws<ArgumentOutOfRangeException>(act);
+            Assert.Equal(0, MockedBook.Reviews.Count);
         }
 
         [Fact]
         public void Getting_average_rating_should_be_the_Reviews_raging_average()
         {
-            //ushort? _expectedRating = 2;
-            //var book = MockedBook;
-            //book.PlaceReview(3);
-            //book.PlaceReview(1);
+            ushort? _expectedRating = 2;
+            var book = MockedBook;
+            book.PlaceReview(3);
+            book.PlaceReview(1);
 
-            //var result = book.GetAverageRating();
+            var result = book.GetAverageRating();
 
-            //Assert.Equal(_expectedRating, result);
+            Assert.Equal(_expectedRating, result);
         }
 
         [Fact]
