@@ -9,7 +9,12 @@ namespace DemoBookStore.Domain.Entities
             ushort quantity
         ) => (Book, Price, Quantity) = (book, book.GetPriceAt(DateTime.Now).Value, quantity);
 
-        public Book Book { get; }
+        private Book _book;
+        public Book Book
+        {
+            get => _book;
+            init => _book = value ?? throw new ArgumentNullException("book");
+        }
         public decimal Price { get; }
         public ushort Quantity { get; }
     }

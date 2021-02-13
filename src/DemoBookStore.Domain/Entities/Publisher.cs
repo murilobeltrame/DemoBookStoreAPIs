@@ -7,7 +7,6 @@ namespace DemoBookStore.Domain.Entities
         public Publisher(string name) => Name = name;
 
         private string _name;
-
         public string Name
         {
             get => _name;

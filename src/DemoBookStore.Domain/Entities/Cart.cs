@@ -11,9 +11,9 @@ namespace DemoBookStore.Domain.Entities
             DateTime createdAt
         ) => (SessionId, CreatedAt) = (sessionId, createdAt);
 
-        public IList<CartItem> Items { get; } = new List<CartItem>();
         public DateTime CreatedAt { get; }
         public Guid SessionId { get; }
+        public IList<CartItem> Items { get; } = new List<CartItem>();
         public bool CheckedOut { get; private set; } = false;
         public decimal TotalValue => Items.Sum(item => item.Price * item.Quantity);
 
