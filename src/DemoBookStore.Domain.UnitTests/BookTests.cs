@@ -31,25 +31,30 @@ namespace DemoBookStore.Domain.UnitTests
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_title_should_throw_an_ArgumentNullException()
         {
+            var expectedExceptionFieldName = "title";
             static void act() => new Book(null, MockedAuthors, MockedPublisher);
-
-            Assert.Throws<ArgumentNullException>(act);
+            var exception = Assert.Throws<ArgumentNullException>(act);
+            Assert.Equal(expectedExceptionFieldName, exception.ParamName);
         }
 
         [Fact]
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_a_least_one_Author_should_throw_an_ArgumentException()
         {
+            var expectedExceptionFieldName = "authors";
             static void act() => new Book(ValidTitle, null, MockedPublisher);
-            Assert.Throws<ArgumentException>(act);
+            var exception = Assert.Throws<ArgumentException>(act);
+            Assert.Equal(expectedExceptionFieldName, exception.ParamName);
         }
 
         [Fact]
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Book_without_a_Publisher_should_throw_an_ArgumentException()
         {
+            var expectedExceptionFieldName = "publisher";
             static void act() => new Book(ValidTitle, MockedAuthors, null);
-            Assert.Throws<ArgumentException>(act);
+            var exception = Assert.Throws<ArgumentException>(act);
+            Assert.Equal(expectedExceptionFieldName, exception.ParamName);
         }
 
         // PRICING

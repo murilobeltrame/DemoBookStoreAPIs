@@ -17,14 +17,14 @@ namespace DemoBookStore.Domain.Entities
         public IEnumerable<Author> Authors
         {
             get => _authors;
-            init => _authors = (value?.Any()).GetValueOrDefault() ? value : throw new ArgumentException("authors");
+            init => _authors = (value?.Any()).GetValueOrDefault() ? value : throw new ArgumentException("","authors");
         }
 
         private Publisher _publisher;
         public Publisher Publisher
         {
             get => _publisher;
-            init => _publisher = value ?? throw new ArgumentException("publisher");
+            init => _publisher = value ?? throw new ArgumentException("", "publisher");
         }
 
         private string _title;

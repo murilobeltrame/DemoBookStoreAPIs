@@ -22,16 +22,20 @@ namespace DemoBookStore.Domain.UnitTests
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Author_without_firstname_should_thrown_ArgumentNullException()
         {
+            var expectedExceptionFieldName = "firstName";
             static void act() => new Author(null, validLastName);
-            Assert.Throws<ArgumentNullException>(act);
+            var exception = Assert.Throws<ArgumentNullException>(act);
+            Assert.Equal(expectedExceptionFieldName, exception.ParamName);
         }
 
         [Fact]
         [SuppressMessage("Performance", "CA1806:Do not ignore method results", Justification = "Should test exception while trying to instantiate de object.")]
         public void Author_without_lastname_should_thrown_ArgumentNullException()
         {
+            var expectedExceptionFieldName = "lastName";
             static void act() => new Author(validFirstName, null);
-            Assert.Throws<ArgumentNullException>(act);
+            var exception = Assert.Throws<ArgumentNullException>(act);
+            Assert.Equal(expectedExceptionFieldName, exception.ParamName);
         }
     }
 }
