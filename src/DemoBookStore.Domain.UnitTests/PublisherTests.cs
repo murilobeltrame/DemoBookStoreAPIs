@@ -7,13 +7,13 @@ namespace DemoBookStore.Domain.UnitTests
 {
     public class PublisherTests
     {
-        private static readonly string validName = "The Publisher";
+        private static readonly string _validName = "The Publisher";
 
         [Fact]
         public void Should_be_instantiated()
         {
-            var _publisher = new Publisher(validName);
-            Assert.Equal(validName, _publisher.Name);
+            var publisher = new Publisher(_validName);
+            Assert.Equal(_validName, publisher.Name);
         }
 
         [Fact]

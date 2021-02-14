@@ -19,7 +19,8 @@ namespace DemoBookStore.Domain.Entities
 
         public void AddItem(Book book, ushort quantity)
         {
-            var item = GetCartItemByTitle(book?.Title);
+            if (book == null) throw new ArgumentNullException("book");
+            var item = GetCartItemByTitle(book.Title);
             if (item != null)
             {
                 var index = Items.IndexOf(item);
@@ -33,18 +34,19 @@ namespace DemoBookStore.Domain.Entities
 
         public void RemoveItem(string bookTitle)
         {
+            if (string.IsNullOrWhiteSpace(bookTitle)) throw new ArgumentNullException("bookTitle");
             var item = GetCartItemByTitle(bookTitle);
+            if (item == null) throw new ArgumentException("", "bookTitle");
             Items.Remove(item);
         }
 
         public void UpdateItemQuantity(string bookTitle, ushort newQuantity)
         {
+            if (string.IsNullOrWhiteSpace(bookTitle)) throw new ArgumentNullException("bookTitle");
             var item = GetCartItemByTitle(bookTitle);
-            if (item != null)
-            {
-                var index = Items.IndexOf(item);
-                Items[index] = new CartItem(item.Book, newQuantity);
-            }
+            if (item == null) throw new ArgumentException("", "bookTitle");
+            var index = Items.IndexOf(item);
+            Items[index] = new CartItem(item.Book, newQuantity);
         }
 
         private CartItem GetCartItemByTitle(string title) => Items.FirstOrDefault(item => string.Compare(item.Book?.Title, title, StringComparison.InvariantCultureIgnoreCase) >= 0);
