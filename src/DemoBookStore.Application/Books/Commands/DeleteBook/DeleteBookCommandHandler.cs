@@ -20,7 +20,7 @@ namespace DemoBookStore.Application.Books.Commands.DeleteBook
         {
             var book = await _repository.GetAsync(book => book.Title == request.Title, cancellationToken);
             if (book == null) throw new RecordNotFoundException();
-            await _repository.DeleteAsync(book, cancellationToken);
+            _repository.Delete(book);
             await _repository.SaveChangesAsync(cancellationToken);
             return new DeleteBookResponse();
         }

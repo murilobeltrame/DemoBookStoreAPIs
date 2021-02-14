@@ -1,9 +1,12 @@
 ﻿using DemoBookStore.Api.Rest.Data;
 using DemoBookStore.Api.Rest.Models;
+using DemoBookStore.Application.Books.Queries.GetBooks;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace DemoBookStore.Api.Rest.Controllers
@@ -13,31 +16,48 @@ namespace DemoBookStore.Api.Rest.Controllers
     public class BooksController : ControllerBase
     {
         private readonly ApplicationDbContext _context;
+        private readonly IMediator _mediator;
 
-        public BooksController(ApplicationDbContext context)
+        public BooksController(ApplicationDbContext context, IMediator mediator)
         {
             _context = context;
+            _mediator = mediator;
         }
 
-        [HttpGet("{id}")]
-        public async Task<ActionResult<Book>> GetBook(Guid id)
-        {
-            var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
-            if (book == null) return NotFound();
-            return Ok(book);
-        }
+        //[HttpGet("{id}")]
+        //public async Task<ActionResult<Book>> GetBook(Guid id)
+        //{
+        //    var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
+        //    if (book == null) return NotFound();
+        //    return Ok(book);
+        //}
+
+        //[HttpGet("{title}")]
+        //public async Task<ActionResult<Book>> GetBook(string title)
+        //{
+        //    //var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
+        //    //if (book == null) return NotFound();
+        //    //return Ok(book);
+        //    var book = await Mediator.Send(new )
+        //}
+
+        //[HttpGet]
+        //public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => Ok(await _context.Books.ToListAsync());
 
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => Ok(await _context.Books.ToListAsync());
+        public async Task<ActionResult<IEnumerable<GetBooksResponse>>> GetBooks(
+            CancellationToken cancellationToken,
+            [FromQuery] GetBooksQuery query
+        ) => Ok(await _mediator.Send(query, cancellationToken));
 
-        [HttpPost]
-        public async Task<ActionResult<Book>> CreateBook(Book book)
-        {
-            if (book == null || !ModelState.IsValid) return BadRequest();
-            await _context.Books.AddAsync(book);
-            await _context.SaveChangesAsync();
-            return CreatedAtAction(nameof(BooksController.GetBook), new { id = book.Id }, book);
-        }
+        //[HttpPost]
+        //public async Task<ActionResult<Book>> CreateBook(Book book)
+        //{
+        //    if (book == null || !ModelState.IsValid) return BadRequest();
+        //    await _context.Books.AddAsync(book);
+        //    await _context.SaveChangesAsync();
+        //    return CreatedAtAction(nameof(BooksController.GetBook), new { id = book.Id }, book);
+        //}
 
         [HttpPut("{id}")]
         public async Task<IActionResult> UpdateBook(Guid id, Book updatedBook)

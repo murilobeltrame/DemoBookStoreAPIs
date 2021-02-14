@@ -1,10 +1,9 @@
 ﻿using System;
+
 namespace DemoBookStore.Domain.Entities
 {
-    public class BaseEntity
+    public abstract record BaseEntity
     {
-        public BaseEntity()
-        {
-        }
+        public Guid Id { get; set; }
     }
 }

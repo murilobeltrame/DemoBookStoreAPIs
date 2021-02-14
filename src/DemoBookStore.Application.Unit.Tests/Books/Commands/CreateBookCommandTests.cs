@@ -1,14 +1,14 @@
-using System;
+using DemoBookStore.Application.Books.Commands.CreateBook;
 using Xunit;
 
 namespace DemoBookStore.Application.Unit.Tests
 {
-    public class UnitTest1
+    public class CreateBookCommandTests
     {
         [Fact]
-        public void Test1()
+        public void CreateBookCommand_should_be_instantiated()
         {
-
+            var createBookCommand = new CreateBookCommand();
         }
     }
 }

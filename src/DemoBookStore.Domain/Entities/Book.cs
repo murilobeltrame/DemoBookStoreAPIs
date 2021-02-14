@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Book
+    public record Book: BaseEntity
     {
         public Book(
             string title,

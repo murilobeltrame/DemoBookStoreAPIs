@@ -12,6 +12,8 @@ namespace DemoBookStore.Application.Books.Queries.GetBooks
 
         public ushort Limit { get; }
 
-        public GetBooksQuery(string sort, int offset, ushort limit) => (Sort, Offset, Limit) = (sort, offset, limit);
+        //public GetBooksQuery(string sort, int offset, ushort limit) => (Sort, Offset, Limit) = (sort, offset, limit);
+
+        public GetBooksQuery() { }
     }
 }

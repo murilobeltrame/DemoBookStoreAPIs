@@ -27,10 +27,10 @@ namespace DemoBookStore.Application.Carts.Commands.AddItem
             var book = await _bookRepository.GetAsync(book => book.Title == request.BookTitle, cancellationToken);
             var cart = await _cartRepository.GetAsync(cart => cart.SessionId == request.SessionId, cancellationToken);
 
-            if (cart == null) cart = new Cart(Guid.NewGuid(), DateTime.Now);
+            if (cart == null) cart = await _cartRepository.CreateAsync(new Cart(Guid.NewGuid(), DateTime.Now), cancellationToken);
             cart.AddItem(book, request.Quantity);
 
-            await _cartRepository.WriteAsync(cart, cancellationToken);
+            await _cartRepository.SaveChangesAsync(cancellationToken);
             return new AddItemResponse(
                 cart.CreatedAt,
                 cart.TotalValue,

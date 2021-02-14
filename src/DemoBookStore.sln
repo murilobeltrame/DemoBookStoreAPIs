@@ -25,6 +25,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3.Framework", "3.Framework"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{6349CB13-B6FC-43B9-9C0E-301BBE33B096}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DemoBookstore.Infrastructure.Database", "DemoBookstore.Infrastructure.Database\DemoBookstore.Infrastructure.Database.csproj", "{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -59,6 +61,10 @@ Global
 		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2FB1B729-AA06-4692-AE58-73195E98BB06}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -74,5 +80,6 @@ Global
 		{2D1BE2B3-900E-4FDF-A121-355D1B92BC99} = {D6BBC2FC-32D0-4AFD-AF33-68CFB36C4939}
 		{43C80910-D642-4A45-AA42-95CDBCC41F7D} = {D6BBC2FC-32D0-4AFD-AF33-68CFB36C4939}
 		{5CD3A0B5-27EC-4459-95E5-18FC36525EEE} = {D6BBC2FC-32D0-4AFD-AF33-68CFB36C4939}
+		{BEE6A5C5-C3C3-433C-9759-2510A7C3BF45} = {D6BBC2FC-32D0-4AFD-AF33-68CFB36C4939}
 	EndGlobalSection
 EndGlobal

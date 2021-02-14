@@ -20,7 +20,8 @@ namespace DemoBookStore.Application.Carts.Commands.ChangeItemQuantity
             var cart = await _repository.GetAsync(cart => cart.SessionId == request.SessionId, cancellationToken);
             cart.UpdateItemQuantity(request.BookTitle, request.NewQuantity);
 
-            await _repository.UpdateAsync(cart, cancellationToken);
+            _repository.Update(cart);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new ChangeItemQuantityResponse();
         }
     }

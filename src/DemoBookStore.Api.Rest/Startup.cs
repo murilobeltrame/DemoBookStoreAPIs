@@ -1,4 +1,5 @@
 using DemoBookStore.Api.Rest.Data;
+using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -6,6 +7,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
+using System;
 
 namespace DemoBookStore.Api.Rest
 {
@@ -21,8 +23,9 @@ namespace DemoBookStore.Api.Rest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=bookstore.db"));
+            services.AddMediatR(AppDomain.CurrentDomain.Load("DemoBookStore.Application"));
 
+            services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=bookstore.db"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

@@ -20,7 +20,8 @@ namespace DemoBookStore.Application.Carts.Commands.RemoveItem
             var cart = await _repository.GetAsync(cart => cart.SessionId == request.SessionId, cancellationToken);
             cart.RemoveItem(request.BookTitle);
 
-            await _repository.UpdateAsync(cart, cancellationToken);
+            _repository.Update(cart);
+            await _repository.SaveChangesAsync(cancellationToken);
             return new RemoveItemResponse();
         }
     }
