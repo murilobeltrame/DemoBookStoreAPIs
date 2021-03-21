@@ -4,7 +4,7 @@ using System.Linq;
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Cart
+    public record Cart : BaseEntity
     {
         public Cart(
             Guid sessionId,

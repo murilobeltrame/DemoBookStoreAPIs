@@ -2,7 +2,7 @@
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Price
+    public record Price : BaseEntity
     {
         public Price(decimal value, DateTime startingAt) => (Value, StartingAt) = (value, startingAt);
 

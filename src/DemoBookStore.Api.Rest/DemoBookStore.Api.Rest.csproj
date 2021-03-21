@@ -21,7 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DemoBookStore.Application\DemoBookStore.Application.csproj">
+    <ProjectReference Include="..\DemoBookstore.Infrastructure.Database\DemoBookstore.Infrastructure.Database.csproj">
       <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
     </ProjectReference>
   </ItemGroup>

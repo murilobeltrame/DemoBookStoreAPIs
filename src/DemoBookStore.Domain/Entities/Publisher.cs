@@ -2,7 +2,7 @@
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Publisher
+    public record Publisher : BaseEntity
     {
         public Publisher(string name) => Name = name;
 

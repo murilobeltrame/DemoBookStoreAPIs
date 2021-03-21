@@ -2,7 +2,7 @@
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Author
+    public record Author : BaseEntity
     {
         public Author(string firstName, string lastName) => (FirstName, LastName) = (firstName, lastName);
 

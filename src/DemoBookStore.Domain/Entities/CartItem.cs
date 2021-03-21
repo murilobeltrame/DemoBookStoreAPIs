@@ -2,7 +2,7 @@
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record CartItem
+    public record CartItem : BaseEntity
     {
         public CartItem(
             Book book,

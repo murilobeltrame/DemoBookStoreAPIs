@@ -1,4 +1,7 @@
-using DemoBookStore.Api.Rest.Data;
+using DemoBookstore.Infrastructure.Database.Data;
+using DemoBookstore.Infrastructure.Database.Repositories;
+using DemoBookStore.Application.Common.Interfaces;
+using DemoBookStore.Domain.Entities;
 using MediatR;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -23,9 +26,11 @@ namespace DemoBookStore.Api.Rest
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddMediatR(AppDomain.CurrentDomain.Load("DemoBookStore.Application"));
-
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlite("Data Source=bookstore.db"));
+            services.AddTransient(typeof(IRepository<Book>), typeof(BookRepository));
+            services.AddTransient(typeof(IRepository<Cart>), typeof(CartRepository));
+
+            services.AddMediatR(AppDomain.CurrentDomain.Load("DemoBookStore.Application"));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>

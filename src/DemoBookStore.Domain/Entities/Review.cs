@@ -2,7 +2,7 @@
 
 namespace DemoBookStore.Domain.Entities
 {
-    public record Review
+    public record Review : BaseEntity
     {
         public Review(ushort rating, string note) => (Rating, Note) = (rating, note);
 

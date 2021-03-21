@@ -1,48 +1,36 @@
-﻿using DemoBookStore.Api.Rest.Data;
-using DemoBookStore.Api.Rest.Models;
+﻿using DemoBookStore.Application.Books.Commands.CreateBook;
+using DemoBookStore.Application.Books.Commands.DeleteBook;
+using DemoBookStore.Application.Books.Commands.ReviewBook;
+using DemoBookStore.Application.Books.Commands.UpdateBookPrice;
 using DemoBookStore.Application.Books.Queries.GetBooks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace DemoBookStore.Api.Rest.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class BooksController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IMediator _mediator;
 
-        public BooksController(ApplicationDbContext context, IMediator mediator)
+        public BooksController(IMediator mediator)
         {
-            _context = context;
             _mediator = mediator;
         }
 
-        //[HttpGet("{id}")]
-        //public async Task<ActionResult<Book>> GetBook(Guid id)
-        //{
-        //    var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
-        //    if (book == null) return NotFound();
-        //    return Ok(book);
-        //}
-
-        //[HttpGet("{title}")]
-        //public async Task<ActionResult<Book>> GetBook(string title)
-        //{
-        //    //var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
-        //    //if (book == null) return NotFound();
-        //    //return Ok(book);
-        //    var book = await Mediator.Send(new )
-        //}
-
-        //[HttpGet]
-        //public async Task<ActionResult<IEnumerable<Book>>> GetBooks() => Ok(await _context.Books.ToListAsync());
+        [HttpGet("{title}")]
+        public async Task<IActionResult> GetBook(string title)
+        {
+            //var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
+            //if (book == null) return NotFound();
+            //return Ok(book);
+            //var book = await Mediator.Send(new )
+            return NotFound();
+        }
 
         [HttpGet]
         public async Task<ActionResult<IEnumerable<GetBooksResponse>>> GetBooks(
@@ -50,36 +38,39 @@ namespace DemoBookStore.Api.Rest.Controllers
             [FromQuery] GetBooksQuery query
         ) => Ok(await _mediator.Send(query, cancellationToken));
 
-        //[HttpPost]
-        //public async Task<ActionResult<Book>> CreateBook(Book book)
-        //{
-        //    if (book == null || !ModelState.IsValid) return BadRequest();
-        //    await _context.Books.AddAsync(book);
-        //    await _context.SaveChangesAsync();
-        //    return CreatedAtAction(nameof(BooksController.GetBook), new { id = book.Id }, book);
-        //}
-
-        [HttpPut("{id}")]
-        public async Task<IActionResult> UpdateBook(Guid id, Book updatedBook)
+        [HttpPost]
+        public async Task<ActionResult<CreateBookResponse>> CreateBook(
+            CancellationToken cancellationToken,
+            CreateBookCommand createBookCommand)
         {
-            if (updatedBook == null || !ModelState.IsValid) return BadRequest();
-
-            var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
-            if (book != null) return NotFound();
-
-            _context.Entry(updatedBook).State = EntityState.Modified;
-            await _context.SaveChangesAsync();
-
-            return NoContent();
+            var result = await _mediator.Send(createBookCommand, cancellationToken);
+            return CreatedAtAction(nameof(BooksController.GetBook), new { title = result.Title }, result);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> DeleteBook(Guid id)
+        [HttpPost("{title}/pricing")]
+        public async Task<IActionResult> UpdateBookPrice(
+            CancellationToken cancellationToken,
+            [FromBody] UpdateBookPriceCommand updatedBookPriceCommand)
         {
-            var book = await _context.Books.FirstOrDefaultAsync(book => book.Id == id);
-            if (book != null) return NotFound();
-            _context.Books.Remove(book);
-            await _context.SaveChangesAsync();
+            await _mediator.Send(updatedBookPriceCommand, cancellationToken);
+            return NoContent(); // TODO: Should return 201 and return Book? BookPrice?
+        }
+
+        [HttpPost("{title}/reviews")]
+        public async Task<IActionResult> CreateBookReview(
+            CancellationToken cancellationToken,
+            [FromBody] ReviewBookCommand reviewBookCommand)
+        {
+            await _mediator.Send(reviewBookCommand, cancellationToken);
+            return NoContent(); // TODO: Should return 201 and return Book? BookReview?
+        }
+
+        [HttpDelete("{title}")]
+        public async Task<IActionResult> DeleteBook(
+            CancellationToken cancellationToken,
+            [FromRoute] string title)
+        {
+            await _mediator.Send(new DeleteBookCommand { Title = title }, cancellationToken);
             return NoContent();
         }
     }
